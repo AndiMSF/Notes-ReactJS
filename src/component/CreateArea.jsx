@@ -23,6 +23,7 @@ function CreateArea(props) {
         <textarea onChange={handleInput} name="content" placeholder="Take a note..." value={input.content} rows="3" />
         <button onClick={(event)=>{
           props.onClicked(input) 
+          setInput({title:"",content: ""})
           event.preventDefault()
           }}>Add</button>
       </form>
