@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+import AddIcon from "@material-ui/icons/Add"
+import Fab from "@material-ui/core/Fab"
+import Zoom from "@material-ui/core/Zoom"
 
 function CreateArea(props) {
 
   const [input, setInput] = useState({title:"",content: ""});
+  const [showForm, setShowForm] = useState(false)
+
+  function showSomething(){
+    setShowForm(true)
+  }
 
   function handleInput(event){
     const {name, value} = event.target
@@ -18,14 +26,16 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form>
-        <input onChange={handleInput} name="title" placeholder="Title" value={input.title} />
-        <textarea onChange={handleInput} name="content" placeholder="Take a note..." value={input.content} rows="3" />
-        <button onClick={(event)=>{
+      <form className="create-note">
+        {showForm && <input onChange={handleInput} name="title" placeholder="Title" value={input.title} />}
+        <textarea onClick={showSomething} onChange={handleInput} name="content" placeholder="Take a note..." value={input.content} rows={showForm ? "3" : "1"} />
+        <Zoom in={showForm}>
+        <Fab onClick={(event)=>{
           props.onClicked(input) 
           setInput({title:"",content: ""})
           event.preventDefault()
-          }}>Add</button>
+          }}><AddIcon /></Fab>
+        </Zoom>
       </form>
     </div>
   );

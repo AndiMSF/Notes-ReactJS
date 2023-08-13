@@ -26,10 +26,11 @@ function App() {
     <div>
       <Header />
       <CreateArea onClicked={addNotes}/>
+      <div className="container">
       {arrayNotes.map((semuaNotes, index) => {
         return <Note key={index} id={index} title={semuaNotes.title} content={semuaNotes.content} onDeleted={removeNotes}/>
       })}
-      
+      </div>
       <Footer />
     </div>
   );
